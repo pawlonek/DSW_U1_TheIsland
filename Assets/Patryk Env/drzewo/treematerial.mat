@@ -48,7 +48,7 @@ Material:
     - _Strenght: 0
     m_Colors:
     - _ColorA: {r: 0, g: 1, b: 0.04511404, a: 0}
-    - _ColorB: {r: 0.008410464, g: 0.066037714, b: 0.012903305, a: 0}
+    - _ColorB: {r: 0, g: 0, b: 0, a: 0}
     - _Speed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
