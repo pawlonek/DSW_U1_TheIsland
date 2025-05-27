@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
     public float airSlow = 0.5f;
 
+    public Camera cam;
 
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        cam = transform.Find("Camera").gameObject.GetComponent<Camera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -61,8 +62,20 @@ public class PlayerController : MonoBehaviour
 
             Vector3 finalMoveVector = moveVector + (playerVelocity.y * Vector3.up);
             cc.Move(finalMoveVector * Time.deltaTime);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if(hit.transform.tag == "Button")
+                    {
+                        hit.transform.GetComponent<Button>().Pressed();
+                    }
+                }
+            }
         }
-
-
     }
 }
