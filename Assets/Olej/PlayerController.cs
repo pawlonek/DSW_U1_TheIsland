@@ -78,4 +78,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    bool IsSlopeTooSteep()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 5f))
+        {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            return slopeAngle > cc.slopeLimit;
+        }
+        return false;
+    }
 }
