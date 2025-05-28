@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float airSlow = 0.5f;
 
     public Camera cam;
+    public LayerMask buttonMask;
 
     void Start()
     {
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 RaycastHit hit;
                 Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, buttonMask))
                 {
                     if(hit.transform.tag == "Button")
                     {

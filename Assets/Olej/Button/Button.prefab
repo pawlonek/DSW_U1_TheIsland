@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 505665724671704850}
   - component: {fileID: 4288535341367268495}
   - component: {fileID: 311998092312160797}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Button
   m_TagString: Button
   m_Icon: {fileID: 0}
@@ -121,6 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04abe22783eb1654b99bc2de64868810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultColor: {r: 1, g: 1, b: 1, a: 0}
-  pressedColor: {r: 0, g: 0.52147245, b: 1, a: 0}
-  correctColor: {r: 0, g: 1, b: 0.5266273, a: 0}
+  intensity: 4
+  pressed: 0
+  success: 0

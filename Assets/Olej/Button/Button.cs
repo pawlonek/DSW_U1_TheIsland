@@ -7,7 +7,7 @@ public class Button : MonoBehaviour
     private Color pressedColor = Color.blue;
     private Color correctColor = Color.green;
 
-    public float intensity = 12f;
+    public float intensity = 8f;
 
     public bool pressed;
     public bool success;
