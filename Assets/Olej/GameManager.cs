@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (finalPuzzle.GetComponent<PuzzleInput>().success)
-        {
-            terrain.GetComponent<CapsuleCollider>().enabled = false;
-        }
+        //if (finalPuzzle.GetComponent<PuzzleInput>().success)
+        //{
+        //    terrain.GetComponent<CapsuleCollider>().enabled = false;
+        //}
     }
 }
