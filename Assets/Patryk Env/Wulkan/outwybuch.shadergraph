@@ -123,7 +123,7 @@
                 "m_Node": {
                     "m_Id": "814d8365ff314e70a277cf855814fb4a"
                 },
-                "m_SlotId": 1
+                "m_SlotId": 2
             },
             "m_InputSlot": {
                 "m_Node": {
@@ -816,9 +816,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 1.0,
-        "g": 0.4944344460964203,
-        "b": 0.04245281219482422,
+        "r": 0.11250614374876023,
+        "g": 1.0,
+        "b": 0.04313725233078003,
         "a": 0.0
     },
     "isMainColor": false,
@@ -1158,7 +1158,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
