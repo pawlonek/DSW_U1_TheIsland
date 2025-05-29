@@ -59,13 +59,13 @@ Material:
     - _Speed: 0.2
     - _SrcBlend: 1
     - _Surface: 1
-    - _TwirlStrenght: 30
+    - _TwirlStrenght: 15
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     - _powerBright: 0
-    - _scale: 5
+    - _scale: 15
     m_Colors:
     - _Color: {r: 0, g: 8.270784, b: 64, a: 0}
   m_BuildTextureStacks: []
