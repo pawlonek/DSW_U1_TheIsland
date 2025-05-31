@@ -1,6 +1,9 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
+using TMPro;
 
 public class Cutscene : MonoBehaviour
 {
@@ -33,6 +36,11 @@ public class Cutscene : MonoBehaviour
     public GameObject ufo2;
     public GameObject ufo3;
 
+    public GameObject cutsceneEnd;
+    private bool credits;
+    List<TMP_Text> texts;
+    public float textAppearSpeed;
+
     void Start()
     {
         fpsCamShake = fpsCam.GetComponent<CinemachineBasicMultiChannelPerlin>();
@@ -46,11 +54,24 @@ public class Cutscene : MonoBehaviour
         largeScale = new Vector3(8f, 8f, volcanoVFX.transform.localScale.z);
 
         halfDuration = blinkDuration / 2f;
+
+        texts = new List<TMP_Text>();
     }
 
     void Update()
     {
-        
+        if(credits)
+        {
+            foreach (var text in cutsceneEnd.GetComponentsInChildren<TMP_Text>())
+            {
+                texts.Add(text);
+            }
+        }
+
+        foreach (var tmptext in texts)
+        {
+            tmptext.color += new Color(0, 0, 0, textAppearSpeed * Time.deltaTime);
+        }
     }
 
     public void SmallShake()
@@ -178,5 +199,31 @@ public class Cutscene : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public void End()
+    {
+        cutsceneEnd.GetComponent<Image>().enabled = true;
+        AudioSource[] allAudioSources1 = ufo1.GetComponents<AudioSource>();
+        AudioSource[] allAudioSources2 = ufo2.GetComponents<AudioSource>();
+        AudioSource[] allAudioSources3 = ufo3.GetComponents<AudioSource>();
+
+        foreach (AudioSource audioSource in allAudioSources1)
+        {
+            audioSource.Stop();
+        }
+        foreach (AudioSource audioSource in allAudioSources2)
+        {
+            audioSource.Stop();
+        }
+        foreach (AudioSource audioSource in allAudioSources3)
+        {
+            audioSource.Stop();
+        }
+    }
+
+    public void Credits()
+    {
+        credits = true;
     }
 }

@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
         moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         moveVector = Vector3.ClampMagnitude(moveVector, 1f);
         moveVector = transform.TransformDirection(moveVector);
