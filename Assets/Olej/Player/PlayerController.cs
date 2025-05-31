@@ -1,7 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    [HideInInspector]
     public CharacterController cc;
     public float walkSpeed = 5;
     public float runSpeed = 7.5f;
@@ -9,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVector;
     private Vector3 playerVelocity;
     public float gravityValue = -9.81f;
+    public float beamValue = 4.905f;
     private Vector3 speedAtJump;
     private Vector3 input;
     private Vector3 airMomentum;
@@ -16,13 +19,18 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
     public float airSlow = 0.5f;
 
+    [HideInInspector]
     public Camera cam;
     public LayerMask buttonMask;
+
+    private AudioSource footsteps;
+    public AudioClip[] clips;
 
     void Start()
     {
         cc = GetComponent<CharacterController>();
         cam = transform.Find("Camera").gameObject.GetComponent<Camera>();
+        footsteps = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -37,10 +45,30 @@ public class PlayerController : MonoBehaviour
             {
                 if(Input.GetKey(KeyCode.LeftShift))
                 {
+                    if(moveVector != Vector3.zero && !footsteps.isPlaying)
+                    {
+                        int randomIndex = Random.Range(0, clips.Length);
+                        AudioClip randomClip = clips[randomIndex];
+
+                        float randomPitch = Random.Range(0.96f, 1.04f);
+                        footsteps.pitch = randomPitch;
+                        footsteps.clip = randomClip;
+                        footsteps.Play();
+                    }
                     moveVector = moveVector * runSpeed;
                 }
                 else
                 {
+                    if (moveVector != Vector3.zero && !footsteps.isPlaying)
+                    {
+                        int randomIndex = Random.Range(0, clips.Length);
+                        AudioClip randomClip = clips[randomIndex];
+
+                        float randomPitch = Random.Range(0.71f, 0.79f);
+                        footsteps.pitch = randomPitch;
+                        footsteps.clip = randomClip;
+                        footsteps.Play();
+                    }
                     moveVector = moveVector * walkSpeed;
                 }
             }
@@ -64,6 +92,15 @@ public class PlayerController : MonoBehaviour
             Vector3 finalMoveVector = moveVector + (playerVelocity.y * Vector3.up);
             cc.Move(finalMoveVector * Time.deltaTime);
 
+            if (cc.isGrounded && moveVector != Vector3.zero && !footsteps.isPlaying)
+            {
+                int randomIndex = Random.Range(0, clips.Length);
+                AudioClip randomClip = clips[randomIndex];
+
+                footsteps.clip = randomClip;
+                footsteps.Play();
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
@@ -79,13 +116,8 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    bool IsSlopeTooSteep()
+    public void StopMoving()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 5f))
-        {
-            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-            return slopeAngle > cc.slopeLimit;
-        }
-        return false;
+        canMove = false;
     }
 }

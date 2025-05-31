@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Playables;
 
 public class PuzzleInput : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PuzzleInput : MonoBehaviour
     public float gap = 0.02f;
     private float buttonXSize;
     private float buttonYSize;
+
+    public GameObject cutscene;
 
     [HideInInspector]
     public bool[] solution = new bool[]{
@@ -44,12 +47,15 @@ public class PuzzleInput : MonoBehaviour
             for (int j = 0; j < 5; j++)
             {
                 GameObject buttonObj = Instantiate(button,
-                    new Vector3(transform.position.x + startXpos + j * (gap + buttonXSize),
-                                transform.position.y + startYpos - i * (gap + buttonYSize),
-                                transform.position.z - zOffset),
-                    Quaternion.identity);
-                buttonObj.transform.localScale = new Vector3(buttonXSize, buttonYSize, thiccness);
+                    transform.position,
+                    transform.rotation);
                 buttonObj.transform.SetParent(transform);
+                buttonObj.transform.localPosition = new Vector3(
+                                startXpos + j * (gap + buttonXSize),
+                                startYpos - i * (gap + buttonYSize),
+                                - zOffset
+                                );
+                buttonObj.transform.localScale = new Vector3(buttonXSize, buttonYSize, thiccness);
                 buttons.Add(buttonObj);
             }
         }
@@ -66,7 +72,11 @@ public class PuzzleInput : MonoBehaviour
         }
 
         if (!success)
+        {
             Success();
+            if (cutscene)
+                cutscene.GetComponent<PlayableDirector>().Play();
+        }
     }
 
     void Success()
