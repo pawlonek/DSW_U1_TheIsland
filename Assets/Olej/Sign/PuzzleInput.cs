@@ -15,6 +15,7 @@ public class PuzzleInput : MonoBehaviour
     public float gap = 0.02f;
     private float buttonXSize;
     private float buttonYSize;
+    public GameObject sound;
 
     public GameObject cutscene;
 
@@ -75,7 +76,15 @@ public class PuzzleInput : MonoBehaviour
         {
             Success();
             if (cutscene)
+            {
+                //stop music
+
+                sound.GetComponent<AudioSource>().Stop();
+
                 cutscene.GetComponent<PlayableDirector>().Play();
+
+             
+            }
         }
     }
 
