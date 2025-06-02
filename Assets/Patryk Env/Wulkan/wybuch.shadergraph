@@ -52,7 +52,11 @@
             "m_Id": "d6448eea29bf415db25a2e0ade27e913"
         }
     ],
-    "m_GroupDatas": [],
+    "m_GroupDatas": [
+        {
+            "m_Id": "793d437385c445d8827c1e0548b43c27"
+        }
+    ],
     "m_StickyNoteDatas": [],
     "m_Edges": [
         {
@@ -287,17 +291,17 @@
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "1b3d8d1ae1464da49a77c0f117544ffc",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "793d437385c445d8827c1e0548b43c27"
     },
     "m_Name": "Property",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -711.0,
-            "y": 222.0,
+            "x": -774.9999389648438,
+            "y": 222.00001525878907,
             "width": 146.0,
-            "height": 34.0
+            "height": 33.99998474121094
         }
     },
     "m_Slots": [
@@ -516,20 +520,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.GroupData",
+    "m_ObjectId": "793d437385c445d8827c1e0548b43c27",
+    "m_Title": "OutLine Material",
+    "m_Position": {
+        "x": -800.0,
+        "y": -63.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "867d4e0b6acb4fd085de6969e8410cef",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "793d437385c445d8827c1e0548b43c27"
     },
     "m_Name": "Property",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -419.0,
-            "y": -4.0,
-            "width": 141.0,
-            "height": 34.0
+            "x": -482.99993896484377,
+            "y": -3.9999961853027345,
+            "width": 141.00003051757813,
+            "height": 33.99998474121094
         }
     },
     "m_Slots": [
@@ -857,17 +872,17 @@
     "m_Type": "UnityEditor.ShaderGraph.SplitNode",
     "m_ObjectId": "d6448eea29bf415db25a2e0ade27e913",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "793d437385c445d8827c1e0548b43c27"
     },
     "m_Name": "Split",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 3.0,
-            "y": 322.0,
+            "x": -60.99991989135742,
+            "y": 322.0000305175781,
             "width": 120.0,
-            "height": 149.0
+            "height": 148.99996948242188
         }
     },
     "m_Slots": [
@@ -1007,17 +1022,17 @@
     "m_Type": "UnityEditor.ShaderGraph.FresnelNode",
     "m_ObjectId": "ea5d3582cfc844f3a16817c582659916",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "793d437385c445d8827c1e0548b43c27"
     },
     "m_Name": "Fresnel Effect",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -529.9999389648438,
-            "y": 118.0,
-            "width": 207.99996948242188,
-            "height": 325.9999694824219
+            "x": -593.9999389648438,
+            "y": 118.00000762939453,
+            "width": 208.0,
+            "height": 326.0000305175781
         }
     },
     "m_Slots": [
@@ -1064,17 +1079,17 @@
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "ee0ef16969c844fb8ff127cb9f2deb57",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "793d437385c445d8827c1e0548b43c27"
     },
     "m_Name": "Multiply",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -247.54931640625,
-            "y": 65.45068359375,
-            "width": 208.0,
-            "height": 302.0
+            "x": -311.99993896484377,
+            "y": 65.0000228881836,
+            "width": 208.00001525878907,
+            "height": 301.99993896484377
         }
     },
     "m_Slots": [
