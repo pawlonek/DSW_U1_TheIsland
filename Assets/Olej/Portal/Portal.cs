@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour
         box = GetComponent<BoxCollider>();
         mesh = GetComponent<MeshCollider>();
         woosh = GetComponent<AudioSource>();
-        puzzleScript = puzzle.GetComponent<PuzzleInput>();
+        puzzleScript = puzzle.GetComponent<PuzzleInput>(); // the puzzle that opens it
         effect = transform.Find("PortalEffect").gameObject;
         vanishStartSize = effect.transform.localScale;
         vanishStep = vanishStartSize * vanishSpeed / 100;
@@ -45,7 +45,7 @@ public class Portal : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (vanish)
+        if (vanish) // decreasing the vfx size
         {
             effect.transform.localScale -= vanishStep;
             if (effect.transform.localScale.x < 0)
@@ -56,11 +56,12 @@ public class Portal : MonoBehaviour
         }
     }
 
+    // on success, play sounds, disabled collider
     void Success()
     {
         box.enabled = false;
         woosh.Play();
-        success = false;
+        success = false; // flag for calling the function only once
     }
 
 }

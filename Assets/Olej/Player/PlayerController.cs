@@ -44,32 +44,32 @@ public class PlayerController : MonoBehaviour
         moveVector = Vector3.ClampMagnitude(moveVector, 1f);
         moveVector = transform.TransformDirection(moveVector);
 
-        if (canMove)
+        if (canMove) // cutscene flag, no movement during cutscene
         {
-            if(cc.isGrounded)
+            if(cc.isGrounded) // checking if grounded
             {
-                if(Input.GetKey(KeyCode.LeftShift))
+                if(Input.GetKey(KeyCode.LeftShift)) // running speed
                 {
-                    if(moveVector != Vector3.zero && !footsteps.isPlaying)
+                    if(moveVector != Vector3.zero && !footsteps.isPlaying) // playing footsteps
                     {
-                        int randomIndex = Random.Range(0, clips.Length);
+                        int randomIndex = Random.Range(0, clips.Length); // choosing a random footstep clip from the list
                         AudioClip randomClip = clips[randomIndex];
 
-                        float randomPitch = Random.Range(0.96f, 1.04f);
+                        float randomPitch = Random.Range(0.96f, 1.04f); // adding some randomness in pitch
                         footsteps.pitch = randomPitch;
                         footsteps.clip = randomClip;
                         footsteps.Play();
                     }
                     moveVector = moveVector * runSpeed;
                 }
-                else
+                else // walking speed
                 {
                     if (moveVector != Vector3.zero && !footsteps.isPlaying)
                     {
-                        int randomIndex = Random.Range(0, clips.Length);
+                        int randomIndex = Random.Range(0, clips.Length); // choosing a random footstep clip from the list
                         AudioClip randomClip = clips[randomIndex];
 
-                        float randomPitch = Random.Range(0.71f, 0.79f);
+                        float randomPitch = Random.Range(0.71f, 0.79f); // again some random pitch, the lower pitch, slows down the steps
                         footsteps.pitch = randomPitch;
                         footsteps.clip = randomClip;
                         footsteps.Play();
@@ -77,12 +77,12 @@ public class PlayerController : MonoBehaviour
                     moveVector = moveVector * walkSpeed;
                 }
             }
-            else
+            else // slow down in the air
             {
                 moveVector = moveVector * walkSpeed;
             }
 
-            if (Input.GetButtonDown("Jump") && cc.isGrounded)
+            if (Input.GetButtonDown("Jump") && cc.isGrounded) // jumping
             {
                 speedAtJump = moveVector;
                 playerVelocity.y = jumpForce;
@@ -92,21 +92,12 @@ public class PlayerController : MonoBehaviour
                 moveVector = new Vector3(airMomentum.x, 0, airMomentum.z);
             }
 
-            playerVelocity.y += gravityValue * Time.deltaTime;
+            playerVelocity.y += gravityValue * Time.deltaTime; // adding gravity, cause we're not using rigidbody
 
             Vector3 finalMoveVector = moveVector + (playerVelocity.y * Vector3.up);
             cc.Move(finalMoveVector * Time.deltaTime);
 
-            if (cc.isGrounded && moveVector != Vector3.zero && !footsteps.isPlaying)
-            {
-                int randomIndex = Random.Range(0, clips.Length);
-                AudioClip randomClip = clips[randomIndex];
-
-                footsteps.clip = randomClip;
-                footsteps.Play();
-            }
-
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) // left mouse button for the puzzle interaction
             {
                 RaycastHit hit;
                 Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -121,8 +112,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    #region signals
     public void StopMoving()
     {
         canMove = false;
     }
+    #endregion
 }

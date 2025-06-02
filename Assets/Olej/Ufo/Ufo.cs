@@ -16,14 +16,14 @@ public class Ufo : MonoBehaviour
     void Start()
     {
         mesh = transform.Find("UfoMesh").gameObject.transform;
-        endPos = player.transform.position + offset;
+        endPos = player.transform.position + offset; // the position the UFO will stop at, relative to the player
     }
 
     void Update()
     {
         mesh.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
 
-        if (arrived)
+        if (arrived) // only move when didn't reach destination
             return;
 
         transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);

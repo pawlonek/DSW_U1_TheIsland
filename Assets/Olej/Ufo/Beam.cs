@@ -16,17 +16,19 @@ public class Beam : MonoBehaviour
         largeScale = new Vector3(100f, 100f, transform.localScale.z);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
+        transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime); // rotation
     }
+
+    #region signals
 
     public void IsBeam()
     {
         StartCoroutine(BeamGrow());
     }
 
+    // size increase 
     private IEnumerator BeamGrow()
     {
         float timer = 0f;
@@ -41,4 +43,6 @@ public class Beam : MonoBehaviour
 
         transform.localScale = largeScale;
     }
+
+    #endregion
 }

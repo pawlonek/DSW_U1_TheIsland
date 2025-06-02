@@ -49,6 +49,7 @@ public class Cutscene : MonoBehaviour
         ufoCamShake2 = ufoCam2.GetComponent<CinemachineBasicMultiChannelPerlin>();
         ufoCamShake3 = ufoCam3.GetComponent<CinemachineBasicMultiChannelPerlin>();
 
+        //volcano VFX sizes
         smallScale = new Vector3(0f, 0f, volcanoVFX.transform.localScale.z);
         mediumScale = new Vector3(4f, 4f, volcanoVFX.transform.localScale.z);
         largeScale = new Vector3(8f, 8f, volcanoVFX.transform.localScale.z);
@@ -60,20 +61,23 @@ public class Cutscene : MonoBehaviour
 
     void Update()
     {
-        if(credits)
+        if(credits) // credits flag
         {
             foreach (var text in cutsceneEnd.GetComponentsInChildren<TMP_Text>())
             {
-                texts.Add(text);
+                texts.Add(text); // subscrive credits to the lsit
             }
         }
 
-        foreach (var tmptext in texts)
+        foreach (var tmptext in texts) // decreasing the opacity of the credits
         {
             tmptext.color += new Color(0, 0, 0, textAppearSpeed * Time.deltaTime);
         }
     }
 
+    #region signals
+
+    // small camera shake
     public void SmallShake()
     {
         fpsCamShake.enabled = true;
@@ -89,6 +93,7 @@ public class Cutscene : MonoBehaviour
         ufoCamShake3.AmplitudeGain = 2;
     }
 
+    // big camera shake
     public void BigShake()
     {
         fpsCamShake.enabled = true;
@@ -104,6 +109,7 @@ public class Cutscene : MonoBehaviour
         ufoCamShake3.AmplitudeGain = 4;
     }
 
+    // shaking stop
     public void StopShake()
     {
         fpsCamShake.enabled = false;
@@ -121,7 +127,7 @@ public class Cutscene : MonoBehaviour
     private IEnumerator VolcanoBlink()
     {
         float t = 0;
-        while (t < halfDuration)
+        while (t < halfDuration) // increases the size first
         {
             float lerpFactor = t / halfDuration;
             volcanoVFX.transform.localScale = Vector3.Lerp(smallScale, mediumScale, lerpFactor);
@@ -132,7 +138,7 @@ public class Cutscene : MonoBehaviour
         volcanoVFX.transform.localScale = mediumScale;
 
         t = 0;
-        while (t < halfDuration)
+        while (t < halfDuration) // decreases the size later
         {
             float lerpFactor = t / halfDuration;
             volcanoVFX.transform.localScale = Vector3.Lerp(mediumScale, smallScale, lerpFactor);
@@ -140,7 +146,7 @@ public class Cutscene : MonoBehaviour
             yield return null;
         }
 
-        volcanoVFX.transform.localScale = smallScale;
+        volcanoVFX.transform.localScale = smallScale; // sets scale back to 0, for the big bang
     }
 
     public void IsVolcanoPillar()
@@ -153,7 +159,7 @@ public class Cutscene : MonoBehaviour
         Vector3 startScale = Vector3.zero;
         float timer = 0f;
 
-        while (timer < growDuration)
+        while (timer < growDuration) // same as whith the short blink/burst, increases the size
         {
             float t = timer / growDuration;
             volcanoVFX.transform.localScale = Vector3.Lerp(startScale, largeScale, t);
@@ -161,9 +167,10 @@ public class Cutscene : MonoBehaviour
             yield return null;
         }
 
-        volcanoVFX.transform.localScale = largeScale;
+        volcanoVFX.transform.localScale = largeScale; // leaves the big size for the rest of the cutscene
     }
 
+    #region UFO spawns
     public void Ufo1()
     {
         ufo1.SetActive(true);
@@ -176,6 +183,7 @@ public class Cutscene : MonoBehaviour
     {
         ufo3.SetActive(true);
     }
+    #endregion
 
     public void Beam()
     {
@@ -184,7 +192,7 @@ public class Cutscene : MonoBehaviour
 
     public void BeamUp()
     {
-        player.GetComponent<PlayerController>().gravityValue = 0;
+        player.GetComponent<PlayerController>().gravityValue = 0; // gets rid of gravity first
         StartCoroutine(BeamedUp());
     }
 
@@ -195,12 +203,13 @@ public class Cutscene : MonoBehaviour
         {
             playerVelocity += player.GetComponent<PlayerController>().beamValue * Time.deltaTime;
             Vector3 beamVector = playerVelocity * Vector3.up;
-            player.GetComponent<PlayerController>().cc.Move(beamVector * Time.deltaTime);
+            player.GetComponent<PlayerController>().cc.Move(beamVector * Time.deltaTime); // moves the player upwards
             yield return null;
         }
 
     }
 
+    // turns all the audosources off
     public void End()
     {
         cutsceneEnd.GetComponent<Image>().enabled = true;
@@ -226,4 +235,5 @@ public class Cutscene : MonoBehaviour
     {
         credits = true;
     }
+    #endregion
 }

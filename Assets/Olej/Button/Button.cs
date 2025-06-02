@@ -22,10 +22,11 @@ public class Button : MonoBehaviour
 
     private void Update()
     {
-        if (parentScript.success)
+        if (parentScript.success) // only true when all button are correct
             Correct();
     }
 
+    // swaping color when pressed
     public void Pressed()
     {
         if(!success)
@@ -39,6 +40,7 @@ public class Button : MonoBehaviour
         pressed = !pressed;
     }
 
+    // changing color to green
     public void Correct()
     {
         material.SetColor("_EmissionColor", correctColor * intensity);

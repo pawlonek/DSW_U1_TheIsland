@@ -16,13 +16,13 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked; // locks the cursor to the centre
         playerTransform = transform.parent.gameObject.transform;
     }
 
     void Update()
     {
-        if(!isLooking)
+        if(!isLooking) // cutscene flag, no aiming when it's being played
         {
             mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
 
             playerTransform.Rotate(Vector3.up * mouseX);
         }
-        else
+        else // looks at the volcano at the begining of the cutscene, then the cinemachine takes over
         {
             Vector3 direction = (target.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-
+    #region signals
     public void StartLooking()
     {
         isLooking = true;
@@ -53,4 +53,5 @@ public class CameraController : MonoBehaviour
     {
         isLooking = false;
     }
+    #endregion
 }
